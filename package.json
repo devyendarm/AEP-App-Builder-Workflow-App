@@ -1,0 +1,15 @@
+{
+  "name": "aep-workflow-app",
+  "version": "1.0.0",
+  "description": "AEP Workflow Automation - Adobe App Builder MVP",
+  "scripts": {
+    "start": "aio app run",
+    "deploy": "aio app deploy"
+  },
+  "dependencies": {
+    "@adobe/aio-sdk": "^5.0.0"
+  },
+  "devDependencies": {
+    "@openwhisk/wskdebug": "^1.4.0"
+  }
+}

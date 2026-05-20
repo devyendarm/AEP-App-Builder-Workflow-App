@@ -1,0 +1,33 @@
+[
+  {
+    "type": "INGEST",
+    "label": "Load Audience CSV",
+    "config": {
+      "datasetId": "REPLACE_WITH_YOUR_AEP_DATASET_ID"
+    }
+  },
+  {
+    "type": "QUERY",
+    "label": "Run Segment Query",
+    "config": {
+      "templateId": "REPLACE_WITH_YOUR_QUERY_TEMPLATE_ID",
+      "queryName": "Q3 Segment Builder"
+    }
+  },
+  {
+    "type": "DESTINATION_FLOW",
+    "label": "Export to Destination",
+    "config": {
+      "flowId": "REPLACE_WITH_YOUR_FLOW_SERVICE_ID"
+    }
+  },
+  {
+    "type": "EXTERNAL_API",
+    "label": "Notify Campaign System",
+    "config": {
+      "url": "https://REPLACE_WITH_YOUR_API_ENDPOINT",
+      "method": "POST",
+      "body": "{\"status\": \"complete\"}"
+    }
+  }
+]

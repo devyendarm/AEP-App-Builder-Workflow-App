@@ -1,0 +1,109 @@
+# =============================================================================
+# AEP Workflow Automation App Builder - Main Configuration
+# =============================================================================
+# Copy this file to the ROOT of your aep-workflow-app/ directory.
+# =============================================================================
+
+application:
+  runtimeManifest:
+    packages:
+      aep-workflow:
+        license: Apache-2.0
+        actions:
+
+          # --- file-router: handles CSV upload + AEP batch ingestion ---
+          # Reads workflow config from AIO State (set via Admin UI)
+          file-router:
+            function: actions/file-router/index.js
+            web: 'yes'
+            runtime: 'nodejs:20'
+            annotations:
+              require-adobe-auth: true
+            limits:
+              timeout: 60000
+              memory: 512
+            inputs:
+              LOG_LEVEL: info
+              AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+              AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+              AWS_REGION: $AWS_REGION
+              AEP_API_KEY: $AEP_API_KEY
+              AEP_CLIENT_SECRET: $AEP_CLIENT_SECRET
+
+          # --- event-orchestrator: triggered by AEP I/O Events ---
+          # Executes dynamic step sequence from AIO State run config
+          event-orchestrator:
+            function: actions/event-orchestrator/index.js
+            web: 'no'
+            runtime: 'nodejs:20'
+            annotations:
+              require-adobe-auth: false
+            limits:
+              timeout: 60000
+              memory: 256
+            inputs:
+              LOG_LEVEL: info
+              AEP_API_KEY: $AEP_API_KEY
+              AEP_CLIENT_SECRET: $AEP_CLIENT_SECRET
+          # NOTE: I/O Events subscription for this action is configured in
+          # Adobe Developer Console → Your Project → Add Service → I/O Events
+          # Subscribe to: com.adobe.platform.sources.FlowRunSucceeded
+          #               com.adobe.platform.sources.FlowRunFailed
+          # Webhook URL = this action's runtime URL (shown after aio app deploy)
+
+
+          # --- workflow-status: polled by UI every 5s for live progress ---
+          workflow-status:
+            function: actions/workflow-status/index.js
+            web: 'yes'
+            runtime: 'nodejs:20'
+            annotations:
+              require-adobe-auth: true
+            limits:
+              timeout: 10000
+              memory: 128
+            inputs:
+              LOG_LEVEL: info
+              AEP_API_KEY: $AEP_API_KEY
+              AEP_CLIENT_SECRET: $AEP_CLIENT_SECRET
+
+          # --- workflow-retry: called by UI Retry button ---
+          workflow-retry:
+            function: actions/workflow-retry/index.js
+            web: 'yes'
+            runtime: 'nodejs:20'
+            annotations:
+              require-adobe-auth: true
+            limits:
+              timeout: 30000
+              memory: 128
+            inputs:
+              LOG_LEVEL: info
+              AEP_API_KEY: $AEP_API_KEY
+              AEP_CLIENT_SECRET: $AEP_CLIENT_SECRET
+
+          # --- workflow-save: Admin UI saves workflow config to AIO State ---
+          workflow-save:
+            function: actions/workflow-save/index.js
+            web: 'yes'
+            runtime: 'nodejs:20'
+            annotations:
+              require-adobe-auth: true
+            limits:
+              timeout: 10000
+              memory: 128
+            inputs:
+              LOG_LEVEL: info
+
+          # --- workflow-load: reads workflow config from AIO State ---
+          workflow-load:
+            function: actions/workflow-load/index.js
+            web: 'yes'
+            runtime: 'nodejs:20'
+            annotations:
+              require-adobe-auth: true
+            limits:
+              timeout: 10000
+              memory: 128
+            inputs:
+              LOG_LEVEL: info

@@ -1,0 +1,10 @@
+{
+  "name": "workflow-load",
+  "version": "1.0.0",
+  "description": "Reads workflow configuration from AIO State.",
+  "main": "index.js",
+  "dependencies": {
+    "@adobe/aio-sdk": "^5.0.0",
+    "@adobe/aio-lib-state": "^3.0.0"
+  }
+}

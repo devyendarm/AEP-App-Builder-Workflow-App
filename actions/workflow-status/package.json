@@ -1,0 +1,10 @@
+{
+  "name": "workflow-status",
+  "version": "1.0.0",
+  "description": "Reads current workflow state from AIO State for the React UI dashboard.",
+  "main": "index.js",
+  "dependencies": {
+    "@adobe/aio-sdk": "^5.0.0",
+    "@adobe/aio-lib-state": "^3.0.0"
+  }
+}

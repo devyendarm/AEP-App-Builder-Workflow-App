@@ -1,0 +1,10 @@
+{
+  "name": "file-router",
+  "version": "1.0.0",
+  "description": "Handles CSV upload: routes file to AEP Batch Ingestion and optionally to AWS S3.",
+  "main": "index.js",
+  "dependencies": {
+    "@adobe/aio-sdk": "^5.0.0",
+    "@aws-sdk/client-s3": "^3.600.0"
+  }
+}

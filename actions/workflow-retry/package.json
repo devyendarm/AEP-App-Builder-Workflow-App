@@ -1,0 +1,10 @@
+{
+  "name": "workflow-retry",
+  "version": "1.0.0",
+  "description": "Retries a failed workflow step — query retries auto-execute, ingestion failures prompt re-upload.",
+  "main": "index.js",
+  "dependencies": {
+    "@adobe/aio-sdk": "^5.0.0",
+    "@adobe/aio-lib-state": "^3.0.0"
+  }
+}

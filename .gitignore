@@ -1,0 +1,9 @@
+.env
+.env.*
+node_modules/
+.aio/
+dist/
+*.zip
+temp_zip_dir/
+.idea/
+.vscode/
