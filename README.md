@@ -68,7 +68,7 @@ A native Adobe App Builder application designed for marketers and administrators
 ## 🚀 Setup & Deployment
 
 1. Follow the **[Prerequisites & Pre-Configuration](INSTRUCTIONS.md#phase-0-prerequisites-one-time-laptop-setup)** in `INSTRUCTIONS.md` to set up your Adobe Developer Console Stage Workspace.
-2. Initialize the App Builder workspace on your corporate laptop:
+2. Initialize the App Builder workspace on your system:
    ```bash
    aio app init
    ```
